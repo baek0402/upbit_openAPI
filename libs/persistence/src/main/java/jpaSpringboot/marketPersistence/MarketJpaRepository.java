@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class MarketJpaRepository extends QuerydslRepositorySupport implements MarketDBPort {
@@ -28,5 +29,15 @@ public class MarketJpaRepository extends QuerydslRepositorySupport implements Ma
         Assert.notNull(entityManager, "Entity manager must not null.");
         entityManager.persist(market);
         entityManager.flush();
+    }
+
+    @Override
+    public List<Market> search(String marketName, String koreanName, String englishName) {
+        /*
+        QMarket qMarket = QMarket.market;
+        return selectFrom(qMarket).fetch();
+        */
+        //이거면 그냥 db에 저장된거 다 가져오는거임
+        return null;
     }
 }

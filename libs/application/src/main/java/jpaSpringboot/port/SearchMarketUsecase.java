@@ -9,4 +9,5 @@ public interface SearchMarketUsecase {
 
     List<MarketDto> getAllMarkets();
 
+    List<MarketDto> search(String marketName, String koreanName, String englishName);
 }

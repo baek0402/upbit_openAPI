@@ -10,4 +10,6 @@ public interface MarketDBPort {
     //db랑 연결되는 interface
 
     void save(Market market);
+
+    List<Market> search(String marketName, String koreanName, String englishName);
 }

@@ -1,11 +1,10 @@
 package jpaSpringboot.controller;
 
+import jpaSpringboot.port.CreateMarketUsecase;
 import jpaSpringboot.port.SearchMarketUsecase;
 import jpaSpringboot.port.in.market.MarketDto;
 import jpaSpringboot.response.ResultResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,9 +12,10 @@ import java.util.List;
 public class MarketController{
 
     private SearchMarketUsecase searchMarketUsecase;
-
-    public MarketController(SearchMarketUsecase searchMarketUsecase) {
+    private CreateMarketUsecase createMarketUsecase;
+    public MarketController(SearchMarketUsecase searchMarketUsecase, CreateMarketUsecase createMarketUsecase) {
         this.searchMarketUsecase = searchMarketUsecase;
+        this.createMarketUsecase = createMarketUsecase;
     }
 
     @GetMapping("/api/v1/market/{name}")
@@ -27,6 +27,17 @@ public class MarketController{
     public ResultResponse<List<MarketDto>> getMarkets() {
         List<MarketDto> result = searchMarketUsecase.getAllMarkets();
         return ResultResponse.success(result);
+    }
+
+    @PostMapping(value = "/v1/market/create")
+    public ResultResponse<Void> create (
+            @RequestBody MarketCreateRequestBody requestBody) {
+        createMarketUsecase.create(
+                requestBody.getMarket(),
+                requestBody.getKoreanName(),
+                requestBody.getEnglishName()
+        ); //이렇게 세가지를 넘겨본대
+        return ResultResponse.success();
     }
 
 }

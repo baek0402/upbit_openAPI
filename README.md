@@ -1,15 +1,17 @@
 # SpringBoot를 이용한 Upbit OpenAPI
 
-#### 프로젝트 설명
+### 프로젝트 설명
 클린 아키텍처 기반의 SpringBoot를 이용한 Upbit OpenAPI 호출하기
 
 
-#### 기술 스택
+
+### 기술 스택
 SpringBoot, JPA, MySQL
 
 
-#### 구현 기능
-1. 내부에서 외부 API 호출
+
+### 구현 기능
+#### 1. 내부에서 외부 API 호출
 
 Request URL : localhost:8080/v1/market/all
 
@@ -20,7 +22,7 @@ Request URL : localhost:8080/v1/market/all
 ---
 
 
-2. 조회하려는 마켓 이름을 통한 호출
+#### 2. 조회하려는 마켓 이름을 통한 호출
 
 Request URL : localhost:8080/api/v1/market/KRW-BTC
 
@@ -29,7 +31,7 @@ Request URL : localhost:8080/api/v1/market/KRW-BTC
 ---
 
 
-3. DB로 저장하기
+#### 3. DB로 저장하기
  
 Response URL : localhost:8080/v1/market/create
 

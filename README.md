@@ -43,7 +43,7 @@ Response URL : localhost:8080/v1/market/create
 
 [쿼리 실행]
 
-![Uploading insert_query.png…]()
+![insert_query](https://user-images.githubusercontent.com/84756243/216939239-7e803523-fc56-4be8-ac79-0e68ba2b7251.png)
 
 ---
 

@@ -7,6 +7,7 @@ import jpaSpringboot.port.in.market.MarketDto;
 import jpaSpringboot.port.out.market.MarketDBPort;
 import jpaSpringboot.port.out.market.MarketHttpPort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class SearchMarketService implements SearchMarketUsecase {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MarketDto> search(String marketName, String koreanName, String englishName) {
         List<Market> search = marketDBPort.search(marketName, koreanName, englishName);
         return marketConverter.convert(search);

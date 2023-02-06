@@ -6,6 +6,7 @@ import jpaSpringboot.port.in.market.MarketDto;
 import jpaSpringboot.response.ResultResponse;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 @RestController
@@ -41,9 +42,9 @@ public class MarketController{
     }
 
     //DB내용 불러오기 : 조회할땐 requestbody 보다 requestparam
-    @GetMapping("/v1/market/list")
+    @GetMapping("/v1/market/list") // v1/market/list?marketName=KRW-BTC
     public ResultResponse<List<MarketDto>> search(
-            @RequestParam(required = false) String marketName,
+            @RequestParam String marketName,
             @RequestParam(required = false) String koreanName,
             @RequestParam(required = false) String englishName
     ) {//조회조건이 이렇게 세가지 일 수 있다 + required false 는 값이 없을 수도 있으니까

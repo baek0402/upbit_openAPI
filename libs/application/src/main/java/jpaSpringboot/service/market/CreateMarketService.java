@@ -20,8 +20,7 @@ public class CreateMarketService implements CreateMarketUsecase {
     public void create(String marketName, String koreanName, String englishName) {
         //create하는 메소드를 하나의 트랜잭션으로 묶기
         //먼저 queryDSL을 통해서 한대..
-        marketDBPort.save(
-                Market.builder()
+        marketDBPort.save(Market.builder()
                         .marketSymbol(marketName)
                         .koreanName(koreanName)
                         .englishName(englishName)

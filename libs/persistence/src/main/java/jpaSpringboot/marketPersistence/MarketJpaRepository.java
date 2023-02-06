@@ -1,20 +1,27 @@
 package jpaSpringboot.marketPersistence;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpaSpringboot.domain.Market;
+import jpaSpringboot.domain.QMarket;
 import jpaSpringboot.port.out.market.MarketDBPort;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import static com.querydsl.jpa.JPAExpressions.selectFrom;
+
 @Repository
 public class MarketJpaRepository extends QuerydslRepositorySupport implements MarketDBPort {
 
-    public MarketJpaRepository() {
+    public MarketCreateJpaRepositry marketCreateJpaRepositry;
+
+    public MarketJpaRepository(MarketCreateJpaRepositry marketCreateJpaRepositry) {
         super(Market.class);
+        this.marketCreateJpaRepositry = marketCreateJpaRepositry;
     }
 
     @PersistenceContext
@@ -25,10 +32,11 @@ public class MarketJpaRepository extends QuerydslRepositorySupport implements Ma
 
     @Override
     public void save(Market market) {
-        EntityManager entityManager = getEntityManager();
+        marketCreateJpaRepositry.save(market);
+        /*EntityManager entityManager = getEntityManager();
         Assert.notNull(entityManager, "Entity manager must not null.");
         entityManager.persist(market);
-        entityManager.flush();
+        entityManager.flush();*/
     }
 
     @Override
@@ -37,7 +45,12 @@ public class MarketJpaRepository extends QuerydslRepositorySupport implements Ma
         QMarket qMarket = QMarket.market;
         return selectFrom(qMarket).fetch();
         */
-        //이거면 그냥 db에 저장된거 다 가져오는거임
-        return null;
+
+        JPAQueryFactory query = new JPAQueryFactory(getEntityManager());
+        QMarket qMarket = QMarket.market;
+        BooleanBuilder condition = new BooleanBuilder();
+        condition.and(qMarket.marketSymbol.eq(marketName));
+        return query.selectFrom(qMarket).where(condition).fetch();
     }
+
 }

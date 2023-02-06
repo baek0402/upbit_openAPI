@@ -5,10 +5,7 @@
 
 
 #### 기술 스택
-클린 아키텍처(멀티 모듈)
-SpringBoot,
-
-JPA, MySQL
+SpringBoot, JPA, MySQL
 
 
 #### 구현 기능
